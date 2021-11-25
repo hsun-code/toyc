@@ -1,0 +1,10 @@
+{
+    "good_001.c": "9cf1aaef6024f882feab7a98b2ce42df",
+    "bad_001.c": "unrecognized token at line:1, column:1",
+    "bad_002.c": "unrecognized token at line:1, column:1",
+    "bad_003.c": "unrecognized token at line:1, column:1",
+    "bad_004.c": "unrecognized token at line:1, column:1",
+    "bad_005.c": "unrecognized token at line:1, column:1",
+    "bad_006.c": "tokenization failed at line:1, column:2. '!=' is expected.",
+    "bad_007.c": "tokenization failed at line:1, column:2. '!=' is expected."
+}

@@ -1,0 +1,14 @@
+{
+    "good_001.c": "3e052381f02700738f602bd6672febc0",
+    "bad_001.c": "Mismatch token: SIGN_L_PARENTHESIS, (3,3,1,1)",
+    "bad_002.c": "Mismatch token: SIGN_L_PARENTHESIS, (3,3,5,5)",
+    "bad_003.c": "Mismatch token: SIGN_COMA, (1,1,6,6)",
+    "bad_004.c": "Mismatch token: VAR, b, (1,1,7,7)",
+    "bad_005.c": "Mismatch token: SIGN_SEMICOLON, (1,1,10,10)",
+    "bad_006.c": "Mismatch token: SIGN_ASSIGN, (1,1,11,11)",
+    "bad_007.c": "Mismatch token: SIGN_L_BRACKET, (1,1,14,14)",
+    "bad_008.c": "Mismatch token: SIGN_R_PARENTHESIS, (1,1,13,13)",
+    "bad_009.c": "Mismatch token: SIGN_L_BRACKET, (1,1,14,14)",
+    "bad_010.c": "Mismatch token: KW_INT, (2,2,9,11)",
+    "bad_011.c": "Mismatch token: SIGN_L_PARENTHESIS, (2,2,12,12)"
+}
