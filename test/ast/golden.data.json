@@ -1,5 +1,5 @@
 {
-    "good_001.c": "3e052381f02700738f602bd6672febc0",
+    "good_001.c": "a2bf65af38c657553f89eb4d84c9d9d6",
     "bad_001.c": "Mismatch token: SIGN_L_PARENTHESIS, (3,3,1,1)",
     "bad_002.c": "Mismatch token: SIGN_L_PARENTHESIS, (3,3,5,5)",
     "bad_003.c": "Mismatch token: SIGN_COMA, (1,1,6,6)",

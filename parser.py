@@ -133,8 +133,9 @@ def parse_multail(lval):
         mul_div_op = CUR_TOK_TYPE()
         MOVE_NEXT()
         fact = parse_factor()
-        fact_or_mul = parse_multail(fact)
-        return NEW_NODE(astnode.ExprBinaryNode(mul_div_op, lval, fact_or_mul))
+        # Operator associativity: left to right
+        mul_div = NEW_NODE(astnode.ExprBinaryNode(mul_div_op, lval, fact))
+        return parse_multail(mul_div)
     else:
         return lval
 
@@ -151,8 +152,9 @@ def parse_addtail(lval):
         add_sub_op = CUR_TOK_TYPE()
         MOVE_NEXT()
         mul_expr = parse_mul_expr()
-        mul_or_add = parse_addtail(mul_expr)
-        return NEW_NODE(astnode.ExprBinaryNode(add_sub_op, lval, mul_or_add))
+        # Operator associativity: left to right
+        add_sub = NEW_NODE(astnode.ExprBinaryNode(add_sub_op, lval, mul_expr))
+        return parse_addtail(add_sub)
     else:
         return lval
 
@@ -171,8 +173,9 @@ def parse_cmptail(lval):
         rel_op = CUR_TOK_TYPE()
         MOVE_NEXT()
         add_expr = parse_add_expr()
-        add_or_cmp = parse_cmptail(add_expr)
-        return NEW_NODE(astnode.ExprBinaryNode(rel_op, lval, add_or_cmp))
+        # Operator associativity: left to right
+        rel = NEW_NODE(astnode.ExprBinaryNode(rel_op, lval, add_expr))
+        return parse_cmptail(rel)
     else:
         return lval
 
@@ -187,6 +190,7 @@ def parse_asstail(lval):
     if CUR_TOK_TYPE() == TokenType.SIGN_ASSIGN:
         MOVE_NEXT()
         cmp_expr = parse_cmp_expr()
+        # Operator associativity: right to left
         cmp_or_ass = parse_asstail(cmp_expr)
         return NEW_NODE(astnode.ExprAssignNode(lval, cmp_or_ass))
     else:

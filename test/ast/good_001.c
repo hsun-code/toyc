@@ -39,6 +39,7 @@ int test(int num)
 	arr[b] = a;
 	a = -b;
 	a = -10;
+	a = b = c;
 	a = a + b - c;
 	a = a - b + c;
 	a = b / c * 2;
