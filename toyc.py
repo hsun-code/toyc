@@ -75,7 +75,7 @@ def main():
     logger.info("Parse phase")
     parser.parse()
 
-    # symtab_ir
+    # symbol table and IR generation
     logger.info(PHASE_TAG_STR)
     logger.info("symtab+ir phase")
     symtab_ir.gen()

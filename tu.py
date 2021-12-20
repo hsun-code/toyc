@@ -9,10 +9,10 @@ as_file_name = ''
 log_file_name = ''
 toks = list()
 ast = list()
-varpool = list()
-vartab = dict()
-funpool = list()
-funtab = dict()
+var_pool = list()
+var_tab = dict()
+fun_pool = list()
+fun_tab = dict()
 logger = logging.getLogger("toyc")
 
 PHASE_TAG_STR = "====================================="

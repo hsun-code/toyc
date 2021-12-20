@@ -1,59 +1,41 @@
-import os
 import sys
 
 import tu
 from tu import logger
 from tu import SUBPHASE_TAG_STR
 from tu import dump_checksum
-from tok import Token
+
 # from astnode import ASTNode
 # import lexer
 chksum_file = '/tmp/toyc.symtab.ir'
 
 
 ################################
+# DESC on tu.var_pool, tu.var_tab, tu.fun_pool, tu.fun_tab
+#
+# tu.var_pool: a list of variable info
+#   Each element is one Var instance.
+#
+# tu.var_tab: a dict of mapping from string to one list.
+#   string: the variable name
+#   list: each element is the index of variable in var_pool.
+#   Example: {tmp: [1], val: [2,3]}
+#
+# tu.fun_pool: a list of function info
+#   Each element is one Fun instance.
+#
+# tu.fun_tab: a dict of mapping from string to an integer
+#   string: the function name
+#   integer: the index of this function in fun_pool
+#   Example: {foo: 1, bar: 2}
+
+
+################################
 # global data
 
-# tu.varpool: a list of variable info
-#   0. string: name
-#   1. vector: scope info
-#   2. int: type info. 0 -> int (currently only INT type is supported.)
-#   3. bool: is pointer? 0|1
-#   4. bool: is array? 0|1
-#   5. bool: is inited? 0|1
-#   6. int: size
-#   7. int: offset
-#
-# Example:
-# [[...],
-#  [tmp, [0,2,4], 0, 0, 1, 1, 4, 8], # inx = 1
-#  [val, [0,2], 0, 0, 1, 1, 32, 16], # inx = 2
-#  [val, [0,3], 0, 0, 1, 1, 8, 64]   # inx = 3
-# ]
-#
-# tu.vartab: map one var name to one vector, which stores a list of var indexes.
-# Example: {tmp:[1], val: [2,3]}
-#
-# tu.funpool: a list of function info
-#   0. string: name
-#   1. int: return type. 0 -> int
-#   2. vector: parameter index list
-#   3. int: max depth
-#   4. int: current depth
-#   5. vector: scope size info
-#   6. vector: ir instructions
-#
-# Example:
-# [[...],
-#  [fun, 0, [1,3], 96, 3, [0,2,4],[xxx]] # inx = 1
-# ]
-#
-# tu.funtab: map one func name to one func index.
-# Example: {fun:1, fib:2}
-
-# function index under analysis
+# current function under analysis
 cur_fun_inx = -1
-# current scope id(always increasing)
+# current scope id (always increasing)
 scope_id = -1
 # current scope path
 scope_path = list()
@@ -71,10 +53,12 @@ def FUNC_ENTER_SCOPE():
         # 5: scope size info
         tu.funpool[cur_fun_inx][5].append(0)
 
+
 def FUNC_LEAVE_SCOPE():
     global cur_fun_inx
     if cur_fun_inx != -1:
         tu.funpool
+
 
 def SYM_ENTER():
     global scope_id
@@ -82,6 +66,7 @@ def SYM_ENTER():
     global scope_path
     scope_path.append(scope_id)
     FUNC_ENTER_SCOPE()
+
 
 def SYM_LEAVE():
     global scope_path
