@@ -22,24 +22,26 @@ astnode_inx = -1
 ################################
 # helpers to access toks and astnodes
 
+# Get current token type
 def CUR_TOK_TYPE():
     global tok_inx
     return tu.toks[tok_inx].type
 
 
+# Get current token value
 def CUR_TOK_VAL():
     # Note: string for VAR and integer for CONST_VAL
     global tok_inx
     return tu.toks[tok_inx].value
 
 
+# Move to next token
 def MOVE_NEXT():
     global tok_inx
     tok_inx = tok_inx + 1
 
-# exit if mismatch
 
-
+# Check whether current token type is the given one
 def MATCH_TOK(token_type):
     if CUR_TOK_TYPE() != token_type:
         global tok_inx
@@ -49,9 +51,8 @@ def MATCH_TOK(token_type):
         logger.error(err_str)
         sys.exit()
 
-# append new astnode into tu.ast and return the index.
 
-
+# Append new astnode into tu.ast and return the index.
 def NEW_NODE(node):
     global astnode_inx
     astnode_inx = astnode_inx + 1
@@ -117,7 +118,8 @@ def parse_factor():
         if is_cst_val:
             # No need to generate Unary Neg op for negative numbers.
             assert unary_op == TokenType.OP_SUB, "unaray_op must be OP_SUB!"
-            assert isinstance(tu.ast[val_expr], astnode.CstNode), "val_expr node must be CstNode!"
+            assert isinstance(
+                tu.ast[val_expr], astnode.CstNode), "val_expr node must be CstNode!"
             tu.ast[val_expr].neg()
             return val_expr
         else:
